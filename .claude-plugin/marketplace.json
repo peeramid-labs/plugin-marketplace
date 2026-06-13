@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
+  "name": "peeramid-labs",
+  "description": "Peeramid Labs developer-tool plugins for Claude Code",
+  "owner": {
+    "name": "Peeramid Labs",
+    "email": "engineering@peeramid.xyz",
+    "url": "https://peeramid.xyz"
+  },
+  "plugins": [
+    {
+      "name": "quorum",
+      "source": "./quorum",
+      "description": "Multi-agent deliberation CLI. /quorum:init, /quorum:redeem, /quorum:run, /quorum:serve, /quorum:status, /quorum:trace, /quorum:validate, /quorum:tui — wrap the quorum-cli binary with Claude-driven prompts, .env auto-detection, and post-run diagnosis.",
+      "version": "0.1.0",
+      "homepage": "https://github.com/peeramid-labs/quorum",
+      "tags": ["ai", "agents", "deliberation", "nats", "cli"]
+    }
+  ]
+}
