@@ -58,18 +58,9 @@ Also bundles the canonical `slop.md` skill so the same "what does the verdict me
 
 Plus a **PreToolUse hook** (`hooks/pre-commit-poke.sh`) that intercepts every `Bash` tool call Claude makes, lets non-commit commands through, and runs `slop poke --staged` before any `git commit*`. Non-LGTM verdicts surface to Claude with the suggested patch — the model can call `/slop:apply` and retry the commit, or you can bypass once with `SLOP_SKIP_HOOK=1 git commit ...`.
 
-## Install
+## Prerequisite — install the `slop` CLI
 
-```
-/plugin marketplace add peeramid-labs/sloppoke
-/plugin install sloppoke@peeramid-labs
-```
-
-The first command registers this repo as a marketplace (it ships a
-`.claude-plugin/marketplace.json` at root). The second installs the
-`sloppoke` plugin from it.
-
-The plugin assumes the `slop` binary is already on your `$PATH`. Install it first:
+The plugin assumes the `slop` binary is on `$PATH`:
 
 ```
 curl -fsSL https://sloppoke.me/install.sh | sh
