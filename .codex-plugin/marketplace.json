@@ -1,0 +1,19 @@
+{
+  "name": "peeramid-labs",
+  "description": "Peeramid Labs developer-tool plugins for Codex CLI",
+  "owner": {
+    "name": "Peeramid Labs",
+    "email": "engineering@peeramid.xyz",
+    "url": "https://peeramid.xyz"
+  },
+  "plugins": [
+    {
+      "name": "sloppoke",
+      "source": "./sloppoke",
+      "description": "Pre-commit AI-slop firewall. Wraps the slop CLI with skills + a before_command hook that auto-gates every `git commit` Codex attempts and surfaces the verdict + patch before the commit lands.",
+      "version": "0.2.11",
+      "homepage": "https://sloppoke.me",
+      "tags": ["ai", "slop", "lint", "pre-commit", "code-quality"]
+    }
+  ]
+}

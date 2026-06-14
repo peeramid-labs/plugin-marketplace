@@ -1,0 +1,17 @@
+{
+  "//": "Codex CLI hook config — best-guess schema based on developers.openai.com/codex/hooks. Verify against the live Codex CLI when wiring up; event names, matcher syntax, and the env-var name for the plugin root may need adjustment.",
+  "hooks": [
+    {
+      "event": "before_command",
+      "matcher": "^git commit",
+      "command": "${CODEX_PLUGIN_ROOT}/hooks/pre-commit-poke.sh",
+      "description": "Gate every git commit Codex shells out by running slop poke --staged. SLOP blocks; LGTM/MARKED pass."
+    },
+    {
+      "event": "session_start",
+      "command": "${CODEX_PLUGIN_ROOT}/hooks/session-start-tip.sh",
+      "timeout": 5,
+      "description": "Surface the install-hook nudge when the terminal-level git pre-commit hook is missing."
+    }
+  ]
+}

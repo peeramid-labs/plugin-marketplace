@@ -1,0 +1,16 @@
+{
+  "name": "sloppoke",
+  "version": "0.2.11",
+  "description": "Pre-commit AI-slop firewall for Codex CLI. Sub-10ms verdict per patch. Reuses the same shell hook bodies as the Claude Code variant — same script, different lifecycle wrapper.",
+  "author": {
+    "name": "Peeramid Labs",
+    "email": "engineering@peeramid.xyz",
+    "url": "https://peeramid.xyz"
+  },
+  "homepage": "https://sloppoke.me",
+  "repository": "https://github.com/peeramid-labs/plugin-marketplace",
+  "license": "MIT",
+  "keywords": ["ai", "slop", "lint", "pre-commit", "code-quality"],
+  "hooks": "hooks/codex-hooks.json",
+  "skills": "skills"
+}
