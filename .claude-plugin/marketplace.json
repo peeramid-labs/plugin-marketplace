@@ -15,6 +15,14 @@
       "version": "0.1.0",
       "homepage": "https://github.com/peeramid-labs/quorum",
       "tags": ["ai", "agents", "deliberation", "nats", "cli"]
+    },
+    {
+      "name": "sloppoke",
+      "source": "./sloppoke",
+      "description": "Pre-commit AI-slop firewall. /slop:poke, /slop:apply, /slop:learn, /slop:status, /slop:install-hook wrap the slop CLI. PreToolUse hook auto-gates every `git commit` Claude attempts via Bash and surfaces the verdict + patch before the commit lands.",
+      "version": "0.2.11",
+      "homepage": "https://sloppoke.me",
+      "tags": ["ai", "slop", "lint", "pre-commit", "code-quality"]
     }
   ]
 }
