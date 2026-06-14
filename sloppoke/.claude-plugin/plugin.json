@@ -9,7 +9,7 @@
     "url": "https://peeramid.xyz"
   },
   "homepage": "https://sloppoke.me",
-  "repository": "https://github.com/peeramid-labs/sloppoke",
+  "repository": "https://github.com/peeramid-labs/plugin-marketplace",
   "license": "MIT",
   "keywords": ["ai", "slop", "lint", "pre-commit", "code-quality"]
 }
