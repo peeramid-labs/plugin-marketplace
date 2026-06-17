@@ -12,7 +12,7 @@
       "name": "quorum",
       "source": "./quorum",
       "description": "Multi-agent deliberation CLI. /quorum:init, /quorum:redeem, /quorum:run, /quorum:serve, /quorum:status, /quorum:trace, /quorum:validate, /quorum:tui — wrap the quorum-cli binary with Claude-driven prompts, .env auto-detection, and post-run diagnosis.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "homepage": "https://github.com/peeramid-labs/quorum",
       "tags": ["ai", "agents", "deliberation", "nats", "cli"]
     },

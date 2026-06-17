@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin.json",
   "name": "quorum",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Multi-agent deliberation CLI in Claude Code. Wraps the `quorum` binary with smart prompts, `.env` auto-detection, post-run diagnosis, and a session-start tip that surfaces orchestrator + agent health before the operator types a single command. Slash commands: /quorum:init, /quorum:redeem, /quorum:run, /quorum:serve, /quorum:status, /quorum:trace, /quorum:validate, /quorum:tui.",
   "author": {
     "name": "Peeramid Labs",

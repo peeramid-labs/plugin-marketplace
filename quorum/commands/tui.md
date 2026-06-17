@@ -11,21 +11,24 @@ quorum tui
 
 **What it shows:**
 
-A multi-pane terminal interface (ratatui-backed) with:
+A ratatui-backed interface with a persistent top-level **tab bar**:
 
-1. **Orchestrators pane** — every orchestrator the workspace knows about + their health.
-2. **Agents pane** — discovered agents + their current job / model / capability tags.
-3. **Jobs pane** — running + recent deliberations with their phase, round, score.
-4. **Trace pane** — when a job is selected, the per-round proposal + evaluation history live-streams as new events arrive over SSE.
-5. **Policies pane** — admin / operator-visible policies the workspace can dispatch into.
+1. **Deliberate** — the landing screen. Lists the rooms you can submit to (config rooms, or runtime/remote rooms when running config-free) and launches a deliberation against the selected room with its bound policy.
+2. **Rooms** — list / create / delete rooms. Each row shows the bound policy, panel **fill** (`eligible/desired`), tags, and a detail panel with the agents that would serve it. Create-room form picks the policy from a selector.
+3. **Agents** — discovered agents + their current job / model / capability tags.
+4. **Policies** — operator-visible policies the workspace can dispatch into.
+5. **Settings** — Orchestrators (health/config) + workspace Config.
+
+Selecting a running job opens its trace, where the per-round proposal + evaluation history live-streams over SSE.
+
+**Panel fill:** a room whose eligible agents fall below its policy's target shows a red `✗` (green `✓` when met) on both the Rooms and Deliberate screens — it can't start a deliberation until enough matching agents are online.
 
 **Keybindings:**
 
-- `Tab` / `Shift+Tab` — cycle panes.
-- `?` — show help.
-- `q` — quit.
-- `Enter` on a job — open the trace pane for that job.
-- `s` while a job is selected — "Stop and pick this" (force-finalize).
+- `1`–`5` or `Tab` / `Shift+Tab` — switch top-level tab.
+- `↑` / `↓` — navigate the current list.
+- `Enter` — primary action for the tab (deliberate / open / select).
+- `q` or `Esc` — back / quit.
 
 **Requires:** the binary built with `--features tui` (default for `cargo install`).
 

@@ -11,6 +11,8 @@ Redeem the JWT invite code the user just pasted.
 quorum redeem <invite-code>
 ```
 
+**One-command alternative:** if the operator also wants the workspace config scaffolded (not just creds), `quorum init --invite <invite-code>` redeems *and* writes the matching `agent.yml` / `nsed.yaml` in one shot — see `/quorum:init`. Use plain `quorum redeem` when they only need the credentials.
+
 The binary:
 
 1. Generates a fresh NKey on this host (or reuses `--seed-in PATH` if the operator wants to keep the same NATS identity across re-redeems).

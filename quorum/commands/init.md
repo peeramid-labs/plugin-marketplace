@@ -20,9 +20,19 @@ Bootstrap a quorum workspace in the current directory.
 4. Check for `~/.nsed/operator.token` — surfaces the third auth option in the wizard.
 5. Check whether `api.peeramid.xyz` resolves / responds on `/health`. If unreachable, default suggestion is an embedded orchestrator instead of remote.
 
+**Have an invite code? One-command onboarding:**
+
+If the operator already has an invite code, prefer `quorum init --invite <code>`. It redeems the code (writing creds/token/endpoint, same as `/quorum:redeem`) and then scaffolds the matching config in one shot — auto-picked by the code's audience: an **agent** code writes `agent.yml`, an **operator** code writes `nsed.yaml`. Add `--out-dir <dir>` to redirect the redeemed credentials (default `~/.nsed`).
+
+```
+quorum init --invite <invite-code>
+```
+
+This collapses redeem + init; skip the wizard when it applies.
+
 **Then run the wizard:**
 
-The default `quorum init` (no flags, TTY stdin) drops the operator into the interactive wizard. Pass nothing — the binary handles the prompts.
+The default `quorum init` (no flags, TTY stdin) drops the operator into the interactive wizard. Pass nothing — the binary handles the prompts. The wizard also asks, per agent, for **read access** (files/dirs the agent reads for context) and **write access** (directories it may manage) — these map into `agent.yml` as `builtin_tools: read_file` roots (native LLM), `add_dirs` + `writable` (Claude), or `working_dir` (exec). Leaving a prompt blank grants no access.
 
 If the operator wants non-interactive (CI / Docker entrypoint), use:
 
