@@ -198,9 +198,36 @@ Knobs: `SLOPPOKE_SERVER`, `SLOP_NO_VERSION_CHECK=1`,
 `SLOP_REMOTE_CLONE_DEPTH=<N>`, `SLOP_CACHE_DIR=<path>`,
 `SLOP_NO_COLOR=1` / `NO_COLOR=1`.
 
+## Muting false positives — patch-notation, not opaque ids
+
+Findings are addressed by patch notation — the same `<file>:<line>`
+the verdict already prints — so there is nothing to memorise:
+
+| Granularity                   | Target shape           |
+|-------------------------------|------------------------|
+| Whole file                    | `src/foo.ts`           |
+| File glob                     | `src/sdk-alpha/**`     |
+| Specific line in a specific file | `src/lib.rs:42`     |
+
+Two scopes:
+
+- **`slop poke --disable <target,…>`** — filters out the matching
+  finding(s) for THIS scan only. File-level targets strip the file
+  block BEFORE the patch reaches the server (cheaper); line-level
+  targets apply post-receive.
+- **`slop learn --disable <target,…> "<reason>"`** — sends both the
+  reason and the target(s) to the server-side RL loop. The catalog
+  learns; future scans from the same org get fewer FPs across the
+  pattern, not just this exact line. No local file is written.
+
+**Persistent repo-level FP suppression** lives in `.slopignore`
+(one glob per line, `#` for comments). Tracked in git on purpose
+so every entry is reviewable.
+
 ## Don't bypass it
 
 If `slop poke` flags something the author thinks is fine, the right
-move is `slop learn` (a one-line note explaining why) — NOT
-silencing the finding or committing without a scan. The engine only
-gets sharper if real signal flows back.
+move is `slop learn --disable <path[:line]> "<reason>"` (one-line
+explanation paired with the precise target) — NOT silencing every
+finding or committing without a scan. The engine only gets sharper
+if real signal flows back.
