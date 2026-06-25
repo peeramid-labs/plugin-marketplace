@@ -188,9 +188,12 @@ URL. Open it, subscribe, retry.
 | `slop poke --repo URL` | scan any git URL (gitlab, bitbucket, self-hosted) |
 | `slop apply` | preflight + `git apply --unidiff-zero` + `git commit --amend` |
 | `slop apply --no-commit` | preflight + `git apply --index`; you commit |
+| `slop apply --skip <8hex,8hex>` | drop matching hunks from the cached patch before `git apply` runs; auto-ships a batched learn signal so tomorrow's catalog de-ranks the pattern |
+| `slop apply --skip ... --skip-reason "<text>"` | same as `--skip` but attaches an explicit WHY to the auto-learn signal |
 | `slop apply --show` | print cached plan (patch + actions) |
 | `slop apply --discard` | drop cached plan, no patch action |
 | `slop learn "<text>"` | shape future scans |
+| `slop learn --disable '<path>:<8hex>' "<reason>"` | mute one finding + train the catalog upstream |
 | `slop billing tier` | quota + usage this cycle |
 | `slop billing portal` | open Stripe portal |
 
@@ -224,10 +227,48 @@ Two scopes:
 (one glob per line, `#` for comments). Tracked in git on purpose
 so every entry is reviewable.
 
+## `TODO(slop):` markers are an asset, not noise
+
+When `slop apply` lands a patch, expect most of the diff to be
+`+// TODO(slop): <category> — <prose>` lines spliced above flagged
+source. The flagged source is left untouched. The markers are
+**deliberate, greppable debt receipts** designed so future agents
+and reviewers can pick up the work cheaply:
+
+- `git grep -n "TODO(slop)"` enumerates every queued cleanup spot
+  in the tree. The list IS the action queue.
+- Each marker carries `(file, line, category)`. No additional
+  triage research is needed — the catalog already matched the
+  pattern.
+- The expected loop is **apply → grep → triage → either fix or
+  file a followup → poke again**. As markers convert to fixes or
+  to backlog entries, the count trends down. Trending it down is
+  the work.
+
+**Never** strip TODO(slop) markers as cleanup. They are not noise,
+they are not warnings to silence — they are the cleanup signal
+itself. Deleting a marker without addressing what it points at
+loses the breadcrumb; the next poke will re-emit it and the
+operator will rightly distrust the agent for the round trip.
+
+If a marker is a clear false positive (SDK alpha types, postgres.js
+tagged templates, `.env.example` placeholder creds, doc snippet
+literal trailers, etc.), the correct response is:
+
+```
+slop learn --disable '<path>:<8hex>' "<one-line reason naming the pattern>"
+```
+
+The `<8hex>` is the `[…]` checksum `slop poke` printed next to that
+finding. `slop learn --disable` ships the target plus the reason to
+the server-side catalog so the same shape stops getting flagged for
+this org going forward — train the system, do not paper over a
+single instance.
+
 ## Don't bypass it
 
 If `slop poke` flags something the author thinks is fine, the right
-move is `slop learn --disable <path[:line]> "<reason>"` (one-line
-explanation paired with the precise target) — NOT silencing every
-finding or committing without a scan. The engine only gets sharper
-if real signal flows back.
+move is `slop learn --disable <path>:<8hex> "<reason>"` (one-line
+explanation paired with the precise checksum target) — NOT silencing
+every finding, deleting markers, or committing without a scan. The
+engine only gets sharper if real signal flows back.

@@ -1,6 +1,6 @@
 {
   "name": "sloppoke",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Pre-commit AI-slop firewall for Codex CLI. Sub-10ms verdict per patch. Reuses the same shell hook bodies as the Claude Code variant — same script, different lifecycle wrapper.",
   "author": {
     "name": "Peeramid Labs",

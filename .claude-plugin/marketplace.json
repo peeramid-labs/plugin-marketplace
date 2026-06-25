@@ -20,7 +20,7 @@
       "name": "sloppoke",
       "source": "./sloppoke",
       "description": "Pre-commit AI-slop firewall. /slop:poke, /slop:apply, /slop:learn, /slop:status, /slop:install-hook wrap the slop CLI. PreToolUse hook auto-gates every `git commit` Claude attempts via Bash and surfaces the verdict + patch before the commit lands.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "homepage": "https://sloppoke.me",
       "tags": ["ai", "slop", "lint", "pre-commit", "code-quality"]
     }

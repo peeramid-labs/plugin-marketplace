@@ -11,7 +11,7 @@
       "name": "sloppoke",
       "source": "./sloppoke",
       "description": "Pre-commit AI-slop firewall. Wraps the slop CLI with skills + a before_command hook that auto-gates every `git commit` Codex attempts and surfaces the verdict + patch before the commit lands.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "homepage": "https://sloppoke.me",
       "tags": ["ai", "slop", "lint", "pre-commit", "code-quality"]
     }
